@@ -40,7 +40,7 @@ No build tools, bundlers, or package.json. All dependencies via CDN.
 1. Load file → `Image()` via object URL
 2. Resize: cap longest edge at 2000px, maintain aspect ratio
 3. Draw to canvas with `imageSmoothingQuality: 'high'`
-4. Iterative JPEG compression: quality 0.92 → 0.30, step 0.05, target ≤ 1MB
+4. Iterative JPEG compression: quality 0.92 → 0.30, step 0.05, target ≤ 1.5MB
 5. Sequential processing (not parallel) to limit memory usage
 
 ## Validation Rules

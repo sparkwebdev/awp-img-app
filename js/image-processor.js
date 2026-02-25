@@ -8,13 +8,13 @@
  *   1. Load file into Image via object URL
  *   2. Calculate target dimensions (longest edge capped at 2000px)
  *   3. Draw to canvas with high-quality smoothing
- *   4. Iterative JPEG compression until <= 1MB (or minimum quality floor)
+ *   4. Iterative JPEG compression until <= 1.5MB (or minimum quality floor)
  *   5. Return final JPEG Blob + dimensions
  */
 
 window.ImageProcessor = {
   MAX_EDGE: 2000,
-  TARGET_SIZE: 1 * 1024 * 1024, // 1MB
+  TARGET_SIZE: 1.5 * 1024 * 1024, // 1.5MB
   INITIAL_QUALITY: 0.92,
   QUALITY_STEP: 0.05,
   MIN_QUALITY: 0.30,
@@ -112,7 +112,7 @@ window.ImageProcessor = {
     blob = await this._canvasToBlob(canvas, this.MIN_QUALITY);
 
     if (blob.size > this.TARGET_SIZE) {
-      warning = 'Image could not be compressed below 1MB at minimum quality. It has been saved at the smallest achievable size.';
+      warning = 'Image could not be compressed below 1.5MB at minimum quality. It has been saved at the smallest achievable size.';
     }
 
     return { blob, width, height, quality: this.MIN_QUALITY, warning };
