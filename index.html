@@ -17,12 +17,20 @@
   <!-- App scripts -->
   <script src="js/image-processor.js"></script>
   <script src="js/app.js"></script>
+  <script src="js/submission-form.js" defer></script>
+  <script src="js/char-counter.js" defer></script>
+  <script src="js/file-upload.js" defer></script>
+  <script src="js/field-validation.js" defer></script>
+  <script src="js/step-navigation.js" defer></script>
+  <script src="js/form-storage.js" defer></script>
+  <script src="js/form-submit.js" defer></script>
+  <script src="js/debug-prefill.js" defer></script>
 
   <!-- Styles -->
   <link rel="stylesheet" href="css/styles.css">
 </head>
 <body>
-  <div class="app-container" x-data="imageApp()" x-cloak>
+  <div class="app-container" x-data="imageApp()" x-cloak style="display:none">
 
     <!-- Screen reader announcements -->
     <div class="sr-only" aria-live="polite" x-text="srAnnouncement"></div>
@@ -327,6 +335,313 @@
       <p>&copy; Art Walk Projects. All processing is done locally in your browser.</p>
     </footer>
 
+  </div>
+
+  <!-- ============ ARTIST SUBMISSION FORM ============ -->
+  <div class="app-container submission-form-container">
+    <header class="app-header">
+      <img src="images/logo.png" alt="Art Walk Projects" class="app-logo">
+    </header>
+
+    <h1 class="step-heading">Artist Submission Form</h1>
+    <p class="step-description">
+      Welcome to the Art Walk Weekends artist application. <strong>The submission deadline is 31<sup>st</sup> March.</strong>
+    </p>
+
+    <form class="submission-form" novalidate>
+
+      <!-- ===== Step 1: Begin ===== -->
+      <div class="form-step" data-step="1" data-step-title="1. Declaration" id="step-1">
+        <h2 class="form-section-heading">1. Declaration</h2>
+        <p>The application covers your contact details, exhibition preferences, artwork description, and supporting materials. You will be asked for:</p>
+        <ul class="submission-info-list">
+          <li>Your exhibition choice, venue address and supporting details</li>
+          <li>Your contact details</li>
+          <li>An artist summary – describing the work you wish to show, including medium and subject matter (no more than 200 characters, approximately 35 words)</li>
+          <li>An artist statement – providing more detailed explanation of your artist practice, including materials used and processes (no more than 1000 characters, approximately 160 words)</li>
+          <li>(For Art in Shops' submissions) – provide a description of how your proposal relates to this year's festival subject title, as detailed within the guidance information (no more than 1000 characters, approximately 160 words)</li>
+          <li>Details of additional events (type, date/time, description)</li>
+          <li>5 high-quality images (jpg or png only, sized to 1500 pixels at their widest point. See note below.)</li>
+          <li>A personal CV (upload as pdf or Word doc)</li>
+        </ul>
+        <p>Please read the <a href="https://artwalkprojects.co.uk/art-walk-weekends/guidance/" target="_blank" rel="noopener">guidance information</a> and <a href="https://artwalkprojects.co.uk/art-walk-weekends/terms-and-conditions/" target="_blank" rel="noopener">Terms and Conditions</a> before beginning your submission.</p>
+        <div class="rules-card" style="margin-top: var(--sp-4)">
+          <p>If you need help to prepare your images, please try our <strong><a href="https://art-walk-img-prep.netlify.app/" target="_blank" rel="noopener">Image Prep Tool</a></strong> <em>(opens in a new window)</em>. This tool will resize and name your images, ready for submission.</p>
+        </div>
+
+        <!-- Declaration -->
+        <fieldset class="form-fieldset">
+          <legend class="form-legend">Declaration</legend>
+          <div class="form-field">
+            <label class="form-checkbox-label">
+              <input type="checkbox" name="consent" required data-error="You must agree to the terms and conditions.">
+              I have read and agree to the <a href="https://artwalkprojects.co.uk/art-walk-weekends/terms-and-conditions/" target="_blank" rel="noopener">Terms and Conditions</a> <span class="required">*</span>
+            </label>
+          </div>
+        </fieldset>
+      </div>
+
+      <!-- ===== Step 2: Contact Details ===== -->
+      <div class="form-step" data-step="2" data-step-title="2. Contact Details" id="step-2">
+        <h2 class="form-section-heading">2. Contact Details</h2>
+
+        <div class="form-field">
+          <label class="form-label" for="sub-name">Your name <span class="required">*</span></label>
+          <input type="text" id="sub-name" name="name" class="form-input" required maxlength="128" data-error="This field is required.">
+        </div>
+
+        <div class="form-field">
+          <label class="form-label" for="sub-address">Your postal address <span class="required">*</span></label>
+          <textarea id="sub-address" name="address" class="form-input" rows="5" required maxlength="512" data-error="This field is required."></textarea>
+        </div>
+
+        <div class="form-field">
+          <label class="form-label" for="sub-postcode">Postcode <span class="required">*</span></label>
+          <input type="text" id="sub-postcode" name="postcode" class="form-input" required maxlength="16" data-error="This field is required.">
+        </div>
+
+        <div class="form-field">
+          <label class="form-label" for="sub-phone">Mobile no <span class="required">*</span></label>
+          <input type="tel" id="sub-phone" name="phone" class="form-input" required maxlength="20" data-error="This field is required.">
+        </div>
+
+        <div class="form-field">
+          <label class="form-label" for="sub-email">Email address <span class="required">*</span></label>
+          <input type="email" id="sub-email" name="email" class="form-input" required maxlength="254" data-error="Please enter a valid email address.">
+        </div>
+
+        <div class="form-field">
+          <label class="form-label" for="sub-website">Website address</label>
+          <input type="text" id="sub-website" name="website" class="form-input" placeholder="https://example.com" maxlength="256">
+        </div>
+
+        <div class="form-field">
+          <label class="form-label" for="sub-social">Social media account</label>
+          <p class="form-description">Please enter only one account, whichever you use most, including full url:</p>
+          <input type="text" id="sub-social" name="social" class="form-input" placeholder="https://example.com" maxlength="256">
+        </div>
+
+        <fieldset class="form-field form-fieldset-inline" data-condition="website:filled,social:filled" data-condition-rule="all">
+          <legend class="form-label">Please indicate which live link you wish to be included in your website and print listing <span class="required">*</span></legend>
+          <div class="form-radio-group">
+            <label class="form-radio-label">
+              <input type="radio" name="live_link" value="website" required data-error="This field is required."> Website
+            </label>
+            <label class="form-radio-label">
+              <input type="radio" name="live_link" value="social" required> Social media
+            </label>
+          </div>
+        </fieldset>
+      </div>
+
+      <!-- ===== Step 3: About Your Exhibition ===== -->
+      <div class="form-step" data-step="3" data-step-title="3. About Your Exhibition" id="step-3">
+        <h2 class="form-section-heading">3. About Your Exhibition</h2>
+
+        <fieldset class="form-field form-fieldset-inline">
+          <legend class="form-label">Where do you want to exhibit? <span class="required">*</span></legend>
+          <div class="form-radio-group">
+            <label class="form-radio-label">
+              <input type="radio" name="exhibit_type" value="art_house" required data-error="Please select an exhibition type."> Art Houses: Home or studio
+            </label>
+            <label class="form-radio-label">
+              <input type="radio" name="exhibit_type" value="art_in_shops" required> Art in Shops: Local shop, cafe or public space
+            </label>
+          </div>
+        </fieldset>
+
+        <!-- Art Houses fields -->
+        <fieldset class="form-fieldset" data-condition="exhibit_type:art_house">
+          <legend class="form-legend">Art Houses</legend>
+
+          <fieldset class="form-field form-fieldset-inline">
+            <legend class="form-label">I am applying as (select only one that applies): <span class="required">*</span></legend>
+            <div class="form-radio-group">
+              <label class="form-radio-label">
+                <input type="radio" name="applying_as" value="single" required data-error="Please select how you are applying."> Single artist venue
+              </label>
+              <label class="form-radio-label">
+                <input type="radio" name="applying_as" value="shared_lead"> As part of shared art house: main artist/venue owner
+              </label>
+              <label class="form-radio-label">
+                <input type="radio" name="applying_as" value="shared_additional"> As part of shared art house: additional artist
+              </label>
+              <label class="form-radio-label">
+                <input type="radio" name="applying_as" value="group"> As a group with collective name
+              </label>
+            </div>
+          </fieldset>
+
+          <div class="form-field" data-condition="applying_as:group">
+            <label class="form-label" for="sub-collective">Enter collective name</label>
+            <input type="text" id="sub-collective" name="collective_name" class="form-input" required maxlength="256" data-error="This field is required.">
+          </div>
+
+          <div class="form-field" data-condition="applying_as:!shared_additional,applying_as:filled" data-condition-rule="all">
+            <label class="form-label" for="sub-venue-address">Enter location address of venue with postcode <span class="required">*</span></label>
+            <textarea id="sub-venue-address" name="venue_address" class="form-input" rows="5" maxlength="512" required data-error="Please enter the venue address."></textarea>
+          </div>
+
+          <div class="form-field" data-condition="applying_as:shared_additional">
+            <label class="form-label" for="sub-main-artist">Please specify the main artist/venue owner of your shared art house <span class="required">*</span></label>
+            <input type="text" id="sub-main-artist" name="main_artist" class="form-input" maxlength="128" required data-error="Please specify the main artist/venue owner.">
+          </div>
+
+          <fieldset class="form-field form-fieldset-inline">
+            <legend class="form-label">Does the venue have disabled access? <span class="required">*</span></legend>
+            <div class="form-radio-group form-radio-group--horizontal">
+              <label class="form-radio-label">
+                <input type="radio" name="disabled_access" value="yes" required data-error="Please select an option."> Yes
+              </label>
+              <label class="form-radio-label">
+                <input type="radio" name="disabled_access" value="no"> No
+              </label>
+            </div>
+          </fieldset>
+        </fieldset>
+
+        <!-- Art in Shops fields -->
+        <fieldset class="form-fieldset" data-condition="exhibit_type:art_in_shops">
+          <legend class="form-legend">Art in Shops</legend>
+
+          <div class="form-field">
+            <label class="form-label" for="sub-location-pref">Please indicate if you have preference for a particular location</label>
+            <p class="form-description">Max 200 characters</p>
+            <input type="text" id="sub-location-pref" name="location_preference" class="form-input" placeholder="Enter name of shop / cafe or leave blank if no preference" maxlength="200" data-counter>
+          </div>
+
+          <div class="form-field">
+            <label class="form-label" for="sub-work-proposal">Please indicate the approximate number and size of works you wish to exhibit, together with how your proposed exhibition relates to this year's festival subject title, detailed in the guidance information <span class="required">*</span></label>
+            <p class="form-description">Max 1000 characters</p>
+            <textarea id="sub-work-proposal" name="work_proposal" class="form-input" rows="5" maxlength="1000" required data-counter data-error="Please describe your work proposal."></textarea>
+          </div>
+
+          <div class="rules-card">
+            <ul style="margin: 0; padding-left: 1.5rem; list-style: disc;">
+              <li>Please note we cannot guarantee placement with your first venue of choice. We aim to match artists to appropriate venues based on the type of work proposed, once we have selected all artists.</li>
+              <li>Two artist awards will be offered to selected artists applying through our Art in Shops strand (offering £800 per artist to support the making of new work).</li>
+            </ul>
+          </div>
+        </fieldset>
+      </div>
+
+      <!-- ===== Step 4: About Your Artwork ===== -->
+      <div class="form-step" data-step="4" data-step-title="4. About Your Artwork" id="step-4">
+        <h2 class="form-section-heading">4. About Your Artwork</h2>
+
+        <div class="rules-card">
+          <p><strong>Please write in third person ONLY (do not use 'I')</strong></p>
+        </div>
+
+        <div class="form-field">
+          <label class="form-label" for="sub-artist-summary">Artist Summary <span class="required">*</span></label>
+          <p class="form-description">Text provided here will form your entry on the website and printed map. Please provide a brief description of the work you will be showing, detailing the medium and subject matter. Max 200 characters.</p>
+          <textarea id="sub-artist-summary" name="artist_summary" class="form-input" rows="4" maxlength="200" required data-counter data-error="Please provide an artist summary."></textarea>
+        </div>
+
+        <div class="form-field">
+          <label class="form-label" for="sub-artist-statement">Artist Statement <span class="required">*</span></label>
+          <p class="form-description">Please expand in more detail on your current artistic practice describing your subject matter, themes, materials used or processes of working along with information about recent exhibitions or education, of most relevancy to your planned exhibition. If applying as one collective, please include here all the names of those exhibiting in the collective. Max 1000 characters.</p>
+          <textarea id="sub-artist-statement" name="artist_statement" class="form-input" rows="6" maxlength="1000" required data-counter data-error="Please provide an artist statement."></textarea>
+        </div>
+      </div>
+
+      <!-- ===== Step 5: Additional Events ===== -->
+      <div class="form-step" data-step="5" data-step-title="5. Additional Events" id="step-5">
+        <h2 class="form-section-heading">5. Additional Events</h2>
+
+        <fieldset class="form-field form-fieldset-inline">
+          <legend class="form-label">Are you putting on any additional event(s)? <span class="required">*</span></legend>
+          <p class="form-description">If you have an additional event (talk, demonstration, workshop etc) you would like to run alongside your exhibition, please include it here. This is open to all artists whether you are applying as an Art House or Art in Shops' participant. We will be in touch to finalise details before going to print.</p>
+          <div class="form-radio-group form-radio-group--horizontal">
+            <label class="form-radio-label">
+              <input type="radio" name="additional_events" value="yes" required data-error="Please select an option."> Yes
+            </label>
+            <label class="form-radio-label">
+              <input type="radio" name="additional_events" value="no" required> No
+            </label>
+          </div>
+        </fieldset>
+
+        <div data-condition="additional_events:yes">
+          <div class="form-field">
+            <label class="form-label" for="sub-event-type">Type of event</label>
+            <select id="sub-event-type" name="event_type" class="form-input">
+              <option value="">-- Select if applicable --</option>
+              <option value="workshop">Workshop</option>
+              <option value="demo">Demo</option>
+              <option value="talk">Talk</option>
+              <option value="performance">Performance</option>
+              <option value="walk">Walk</option>
+            </select>
+          </div>
+
+          <div class="form-field">
+            <label class="form-label" for="sub-event-datetime">Date and time</label>
+            <input type="text" id="sub-event-datetime" name="event_datetime" class="form-input" maxlength="128">
+          </div>
+
+          <div class="form-field">
+            <label class="form-label" for="sub-event-description">Description</label>
+            <p class="form-description">Max 350 characters</p>
+            <textarea id="sub-event-description" name="event_description" class="form-input" rows="4" maxlength="350" data-counter></textarea>
+          </div>
+        </div>
+      </div>
+
+      <!-- ===== Step 6: Supporting Materials ===== -->
+      <div class="form-step" data-step="6" data-step-title="6. Supporting Materials" id="step-6">
+        <h2 class="form-section-heading">6. Supporting Materials</h2>
+
+        <h3 class="form-subheading">Images</h3>
+        <p>Please upload 5 images that best represent your recent work. One of these images should be an artist at work or studio shot. If applying as a collective, we require images that show the breadth of work in the collective not just one artist's work.</p>
+
+        <div class="rules-card" style="margin-top: var(--sp-4)">
+          <ul style="margin: 0; padding-left: 1.5rem; list-style: disc;">
+            <li style="margin-bottom: 0.5rem">All images should be recently taken (over the last 2 years) be cropped without frame or borders, and be sized to at least 1500 pixels at their widest or tallest point.</li>
+            <li style="margin-bottom: 0.5rem">Before uploading, please save images with your own name so that we can easily identify them as your work.</li>
+            <li>Accepted formats are jpeg or png only. No tifs, psds or gifs will be accepted.</li>
+          </ul>
+        </div>
+
+        <div class="rules-card">
+          <p>If you need help to prepare your images, please try our <strong><a href="https://art-walk-img-prep.netlify.app/" target="_blank" rel="noopener">Image Prep Tool</a></strong> <em>(opens in a new window)</em>. This tool will resize and name your images, ready for submission.</p>
+        </div>
+
+        <div class="form-field">
+          <label class="form-label" for="sub-images">Upload images (5 required) <span class="required">*</span></label>
+          <p class="form-description">Max 3MB per image</p>
+          <input type="file" id="sub-images" name="images" accept=".jpg,.jpeg,.png" multiple required data-error="Please upload 5 images." data-upload="images" data-max-size="3" data-min-files="5" data-max-files="5">
+        </div>
+
+        <h3 class="form-subheading">Recent CV</h3>
+        <p>Please upload a recent CV (no more than 2 pages in length) that details your education, recent exhibitions, awards &amp; commissions (Pdf or Word doc). The CV is used only for selection purposes. It will not be included as part of your web listing.</p>
+
+        <div class="form-field">
+          <label class="form-label" for="sub-cv">Upload CV <span class="required">*</span></label>
+          <p class="form-description">Max 5MB per document.</p>
+          <input type="file" id="sub-cv" name="cv" accept=".pdf,.doc,.docx" required data-error="Please upload your CV." data-upload="document" data-max-size="5">
+        </div>
+      </div>
+
+      <!-- ===== Step 7: Review & Submit ===== -->
+      <div class="form-step" data-step="7" data-step-title="Review & Submit" data-step-review>
+        <h2 class="form-section-heading">Review &amp; Submit</h2>
+        <div class="form-review-content" hidden>
+          <p class="form-review-warning" hidden>Please check that all sections are complete before submitting.</p>
+          <div class="form-review-list"></div>
+        </div>
+      </div>
+
+    </form>
+
+    <div class="form-clear-row">
+      <button type="button" class="form-clear-btn" id="clear-form-btn">Clear form</button>
+    </div>
+
+    <footer class="app-footer">
+      <p>&copy; Art Walk Projects.</p>
+    </footer>
   </div>
 
   <!-- Fallback for browsers where Alpine/ES6 fails to load -->
