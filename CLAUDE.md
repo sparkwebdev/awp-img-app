@@ -5,7 +5,7 @@
 Art Walk Weekends Image Prep Tool — a fully client-side web app for artists to prepare artwork images for Art Walk Porty submission. No server, no build step. All processing happens in the browser.
 
 **Live:** https://art-walk-img-prep.netlify.app
-**Repo:** https://github.com/sparkwebdev/img-app
+**Repo:** https://github.com/sparkwebdev/awp-img-app
 
 ## File Structure
 
